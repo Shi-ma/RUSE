@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 SR_MODEL=$1
-TEST_DIR=$2
+NPZ_DIR=$2
 
 GPU=-1
 
@@ -27,4 +27,4 @@ elif [ ${SR_MODEL} = 'IS_QT_USE' ]; then
   DROP=0.3
 fi
 
-python ../src/make_score.py --npz_dir ${TEST_DIR} --SR_models ${SR_MODEL} -l ${LAYER} -u ${UNIT} -b ${BATCH} -dr ${DROP} --gpu ${GPU}
+python ../src/make_score.py --npz_dir ${NPZ_DIR} --SR_models ${SR_MODEL} -l ${LAYER} -u ${UNIT} -b ${BATCH} -dr ${DROP} --gpu ${GPU}
