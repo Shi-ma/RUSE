@@ -21,6 +21,7 @@ Please download our pre-trained model from https://drive.google.com/open?id=1AyQ
 
 ## Use our metric
 Please prepare a file in which the reference and the translated text are entered in a tab-delimited fashion for each line　and set it (.tsv file) under a directory named `RUSE/data`.
+
 To create each sentence encoder's feature (.npz file).
 If you want to use all sentence encoder's features, you need to create IS, QT and USE features in under script.
 ```
