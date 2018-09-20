@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
 SR_MODEL=$1
+TSV_PATH=$2
+
+NPZ_OUT_DIR='../npz'
 
 MODE='test'
-TSV_PATH='../data/test.tsv'
-NPZ_OUT_DIR='../npz'
 CASE='true'
 IS_DIR='../encoder_models/InferSent'
 QT_DIR='../encoder_models/S2V'
