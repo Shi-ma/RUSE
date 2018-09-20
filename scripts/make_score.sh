@@ -2,7 +2,8 @@
 
 TEST_DIR=$1
 SR_MODEL=$2
-GPU=$3
+
+GPU=-1
 
 if [ ${SR_MODEL} = 'IS' ]; then
   LAYER=3
