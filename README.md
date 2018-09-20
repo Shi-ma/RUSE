@@ -1,5 +1,5 @@
 # RUSE
-Metric for Metric for Automatic Machine Translation Evaluation, RUSE: Regression model Using Sentence Embeddings
+Metric for Metric for Automatic Machine Translation Evaluation, RUSE: Regression model Using Sentence Embeddings  
 We submitted it to WMT18 Metrics Shared Task.
 
 ## Dependencies
