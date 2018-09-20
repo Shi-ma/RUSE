@@ -1,5 +1,5 @@
 # RUSE
-Metric for Metric for Automatic Machine Translation Evaluation, RUSE: Regression model Using Sentence Embeddings  
+RUSE: Regression model Using Sentence Embeddings for Automatic Machine Translation Evaluation  
 We submitted it to WMT18 Metrics Shared Task.
 
 ## Dependencies
@@ -9,8 +9,8 @@ This code is written in python. Dependencies include:
 
 
 ## Prepare Sentence Encoders
-First, please git clone our metric and git clone following sentence encoders under a directory named `RUSE/encoder_models/`.
-Second, please make the following sentence encoders available refering to each github or TensorFlow hub.
+First, please git clone our metric and git clone following sentence encoders under a directory named `RUSE/encoder_models/`.  
+Second, please make the following sentence encoders available refering to each github or TensorFlow hub.  
 * InferSent \[Conneau et al., 2017\] (https://github.com/facebookresearch/InferSent)
 * Quick-Thought \[Logeswaran and Lee, 2018] (https://github.com/lajanugen/S2V)
 * Unicersal Sentence Encoder \[Cer et al., 2018\] (https://alpha.tfhub.dev/google/universal-sentence-encoder-large/2)
