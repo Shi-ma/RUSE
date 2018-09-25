@@ -37,5 +37,5 @@ bash make_score.sh <SR_MODEL> <NPZ_DIR>
 ```
 ```
 * SR_MODEL  # IS, QT, USE or IS_QT_USE
-* NPZ_DIR  # Path to npz directory
+* NPZ_DIR   # Path to npz directory
 ```
