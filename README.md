@@ -16,7 +16,7 @@ This code is written in python. Dependencies include:
 But, After downloading Quick-Thought's pre-trained model from https://bit.ly/2uttm2j, please set it under a directory named `RUSE/encoder_models/S2V/pretrained_models/`.
 
 ## Download our pre-trained models
-Please download our pre-trained model from https://drive.google.com/open?id=1AyQMMEdFKmrc3fnPuG2rGrGHePCPSHCa and set a directory named `models` under a directory named `RUSE/`.
+Please download our pre-trained model from https://drive.google.com/open?id=1AyQMMEdFKmrc3fnPuG2rGrGHePCPSHCa and set a directory named `RUSE/models`.
 
 ## Use our metric
 Please prepare a file in which the reference and the translated text are entered in a tab-delimited fashion for each line　and set it (.tsv file) under a directory named `RUSE/data`.  
