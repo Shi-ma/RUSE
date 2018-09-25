@@ -28,7 +28,7 @@ cd scripts
 bash tsv2npz.sh <SR_MODEL> <TSV_PATH>
 ```
 ```
-* SR_MODEL  # IS or QT or USE
+* SR_MODEL  # IS, QT or USE
 * TSV_PATH  # Path to your prepared tab-delimited data
 ```
 To make scores with RUSE.
@@ -36,6 +36,6 @@ To make scores with RUSE.
 bash make_score.sh <SR_MODEL> <NPZ_DIR>
 ```
 ```
-* SR_MODEL  # IS or QT or USE or IS_QT_USE
+* SR_MODEL  # IS, QT, USE or IS_QT_USE
 * NPZ_DIR  # Path to npz directory
 ```
