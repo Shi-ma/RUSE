@@ -76,31 +76,12 @@ def concat_npz(args):
     for SR in args.SR_models.split('_'):
         npz_path = os.path.join(args.npz_dir, SR + '.npz')
         features, labels = load_npz(npz_path)
-        # print(len(features), len(labels))
-        # print(len(features[0]))
         SR_features.append(features)
     last_features = [np.concatenate(temp, axis=0) for temp in zip(*SR_features)]
     last_labels.extend(labels)
-    # print(len(last_features), len(last_labels))
-    # print(len(last_features[0]))
 
     return last_features, last_labels
 
-
-# def p_score(labels, preds):
-#     pearsonr_score = pearsonr(labels, preds)[0]
-#
-#     return pearsonr_score
-
-
-# def test(features, labels, args):
-#     path_model = '/work/shimanaka/STS4MTEval/results/train_SVR/mix_{}/{}/{}'.format(args.SR_models.replace(',', '_'), args.DA_versions.replace(',', '_'), 'model_{}.dump'.format(args.case))
-#     # Test
-#     regressor = pickle.load(open(path_model, 'rb'))
-#
-#     predicts = regressor.predict(features)
-#     print('\n' + args.npz_dir)
-#     print('Pearsonr : {}\n'.format(pearsonr(labels, np.array(predicts))[0]))
 
 
 if __name__ == '__main__':
@@ -150,4 +131,4 @@ if __name__ == '__main__':
                 score = pred.data[0][0]
                 scores.append(score)
                 print(score)
-    # print(pearsonr(labels, np.array(scores)))
+

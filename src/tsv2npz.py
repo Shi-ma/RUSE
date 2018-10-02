@@ -69,18 +69,6 @@ def load_model(FLAGS):
     return model
 
 
-# def length_check(txt):
-#     if ',' in txt:
-#         txt.replace(',', '')
-#         txt_list = txt.split()
-#     else:
-#         txt_list = txt.split()[:100]
-#     if len(txt_list) > 100:
-#         txt_list = txt_list[:100]
-#
-#     return ' '.join(txt_list)
-
-
 
 def tsv2npz(model, FLAGS):
     refs = list()
@@ -121,7 +109,7 @@ def tsv2npz(model, FLAGS):
             try:
                 out_embs.append(*(model.encode([out])))
             except:
-                out_embs.append(*(model.encode([out])))
+                out_embs.append(np.zeros(4800))
     elif FLAGS.sr_model == 'USE':
         with tf.Session() as session:
             session.run([tf.global_variables_initializer(), tf.tables_initializer()])
@@ -142,7 +130,6 @@ if __name__ == '__main__':
     model = load_model(FLAGS)
     print('\n< make npz ... >')
     features, labels = tsv2npz(model, FLAGS)
-    # print(len(features[0]))
 
     print('\n< save npz ... >')
     npz_out_path = os.path.join(FLAGS.npz_out_dir, '{}.npz'.format(FLAGS.sr_model))
