@@ -7,20 +7,9 @@ import sys
 import os
 import io
 
-FLAGS = tf.flags.FLAGS
-tf.flags.DEFINE_string('mode', 'test', 'train or dev or test')
-tf.flags.DEFINE_string('tsv_path', None, 'input: tsv_path')
-tf.flags.DEFINE_string('npz_out_dir', None, 'output file directory')
-# tf.flags.DEFINE_integer('gpu_id', None, 'gpu_id')
-tf.flags.DEFINE_string('sr_model', None, 'eg. IS or QT or USE')
-tf.flags.DEFINE_string('case', 'true', 'true or lower')
-tf.flags.DEFINE_string('is_dir', None, 'IS directory')
-tf.flags.DEFINE_string('qt_dir', None, 'QT directory')
-tf.flags.DEFINE_string('qt_pretrained_dir', None, 'QT pre-trained models directory include models and dictionaries')
-
-sys.path.append(FLAGS.is_dir)
+sys.path.append('../encoder_models/InferSent')
 from models import InferSent
-sys.path.append(os.path.join(FLAGS.qt_dir, 'src'))
+sys.path.append('../encoder_models/S2V/src')
 import configuration
 import encoder_manager
 
@@ -39,20 +28,6 @@ def load_model(FLAGS):
         model.set_w2v_path(W2V_PATH)
     elif FLAGS.sr_model == 'QT':
         # Load Quick-Thought
-        tf.flags.DEFINE_string("eval_task", "MSRP",
-                               "Name of the evaluation task to run. Available tasks: "
-                               "MR, CR, SUBJ, MPQA, SICK, MSRP, TREC.")
-        tf.flags.DEFINE_string("data_dir", None, "Directory containing training data.")
-        tf.flags.DEFINE_float("uniform_init_scale", 0.1, "Random init scale")
-        tf.flags.DEFINE_integer("batch_size", 400, "Batch size")
-        tf.flags.DEFINE_boolean("use_norm", False,
-                                "Normalize sentence embeddings during evaluation")
-        tf.flags.DEFINE_integer("sequence_length", 30, "Max sentence length considered")
-        tf.flags.DEFINE_string("model_config", os.path.join(FLAGS.qt_dir, "model_configs/MC-UMBC/eval.json"), "Model configuration json")
-        tf.flags.DEFINE_string("results_path", os.path.join(FLAGS.qt_pretrained_dir, "models"), "Model results path")
-        tf.flags.DEFINE_string("Glove_path", os.path.join(FLAGS.qt_pretrained_dir, "dictionaries/GloVe"), "Path to Glove dictionary")
-        tf.logging.set_verbosity(tf.logging.INFO)
-
         model = encoder_manager.EncoderManager()
 
         with open(FLAGS.model_config) as json_config_file:
@@ -61,13 +36,12 @@ def load_model(FLAGS):
             model_config = [model_config]
 
         for mdl_cfg in model_config:
-            model_config = configuration.model_config(mdl_cfg, mode="encode")
+            model_config = configuration.model_config(mdl_cfg, mode='encode')
             model.load_model(model_config)
     elif FLAGS.sr_model == 'USE':
         model = hub.Module('https://tfhub.dev/google/universal-sentence-encoder-large/2')
 
     return model
-
 
 
 def tsv2npz(model, FLAGS):
@@ -94,9 +68,6 @@ def tsv2npz(model, FLAGS):
         model.build_vocab(refs + outs, tokenize=True)
         ref_embs = model.encode(refs, tokenize=True)
         out_embs = model.encode(outs, tokenize=True)
-    # elif FLAGS.sr_model == 'QT':
-    #     ref_embs = model.encode(refs)
-    #     out_embs = model.encode(outs)
     elif FLAGS.sr_model == 'QT':
         ref_embs = list()
         out_embs = list()
@@ -123,6 +94,29 @@ def tsv2npz(model, FLAGS):
 
 
 if __name__ == '__main__':
+    FLAGS = tf.flags.FLAGS
+    tf.flags.DEFINE_string('mode', 'test', 'train or dev or test')
+    tf.flags.DEFINE_string('tsv_path', None, 'input: tsv_path')
+    tf.flags.DEFINE_string('npz_out_dir', None, 'output file directory')
+    # tf.flags.DEFINE_integer('gpu_id', None, 'gpu_id')
+    tf.flags.DEFINE_string('sr_model', None, 'eg. IS or QT or USE')
+    tf.flags.DEFINE_string('case', 'true', 'true or lower')
+    tf.flags.DEFINE_string('eval_task', 'MSRP',
+                           'Name of the evaluation task to run. Available tasks: '
+                           'MR, CR, SUBJ, MPQA, SICK, MSRP, TREC.')
+    tf.flags.DEFINE_string('data_dir', None, 'Directory containing training data.')
+    tf.flags.DEFINE_float('uniform_init_scale', 0.1, 'Random init scale')
+    tf.flags.DEFINE_integer('batch_size', 400, 'Batch size')
+    tf.flags.DEFINE_boolean('use_norm', False,
+                            'Normalize sentence embeddings during evaluation')
+    tf.flags.DEFINE_integer('sequence_length', 30, 'Max sentence length considered')
+    tf.flags.DEFINE_string('model_config', os.path.join('../encoder_models/S2V', 'model_configs/MC-UMBC/eval.json'),
+                           'Model configuration json')
+    tf.flags.DEFINE_string('results_path', os.path.join('../encoder_models/S2V/pretrained_models', 'models'), 'Model results path')
+    tf.flags.DEFINE_string('Glove_path', os.path.join('../encoder_models/S2V/pretrained_models', 'dictionaries/GloVe'),
+                           'Path to Glove dictionary')
+    tf.logging.set_verbosity(tf.logging.INFO)
+
     if not FLAGS.npz_out_dir:
         print('npz_out_dir not defined.')
 
