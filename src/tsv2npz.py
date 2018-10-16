@@ -75,12 +75,14 @@ def tsv2npz(model, FLAGS):
             try:
                 ref_embs.append(*(model.encode([ref])))
             except:
-                ref_embs.append(np.zeros(4800))
+                r = np.random.RandomState(1234)
+                ref_embs.append(r.rand(4800))
         for out in outs:
             try:
                 out_embs.append(*(model.encode([out])))
             except:
-                out_embs.append(np.zeros(4800))
+                r = np.random.RandomState(1234)
+                out_embs.append(r.rand(4800))
     elif FLAGS.sr_model == 'USE':
         with tf.Session() as session:
             session.run([tf.global_variables_initializer(), tf.tables_initializer()])
