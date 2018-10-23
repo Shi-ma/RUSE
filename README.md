@@ -6,6 +6,7 @@ We submitted it to WMT18 Metrics Shared Task.
 This code is written in python. Dependencies include:
 * Python 2.7.9
 * [Chainer](https://chainer.org/) 4.2.0
+* cupy==4.2.0
 
 ## Prepare Sentence Encoders
 1. Please git clone our metric and git clone following sentence encoders under a directory named `RUSE/encoder_models/`.
