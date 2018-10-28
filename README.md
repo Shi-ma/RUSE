@@ -34,6 +34,7 @@ bash tsv2npz.sh <SR_MODEL> <TSV_PATH>
 ```
 To make scores with RUSE.
 ```
+cd scripts
 bash make_score.sh <SR_MODEL> <NPZ_DIR>
 ```
 ```
