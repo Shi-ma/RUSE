@@ -1,6 +1,7 @@
 # RUSE
 RUSE: Regression model Using Sentence Embeddings for Automatic Machine Translation Evaluation  
-We submitted it to [WMT18 Metrics Shared Task](http://www.statmt.org/wmt18/pdf/WMT078.pdf).
+We submitted it to [WMT18 Metrics Shared Task](http://www.statmt.org/wmt18/metrics-task.html).
+[This](http://www.statmt.org/wmt18/pdf/WMT078.pdf) is a link to the resulting paper.
 
 ## Dependencies
 This code is written in python. Dependencies include:
